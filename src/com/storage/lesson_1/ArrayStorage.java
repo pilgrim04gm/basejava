@@ -3,7 +3,6 @@ package com.storage.lesson_1;
 /**
  * Array based storage for Resumes
  */
-
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
     int size = 0;
