@@ -1,3 +1,5 @@
+package com.storage.lesson_2;
+
 /**
  * Initial resume class
  */

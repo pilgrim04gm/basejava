@@ -1,5 +1,7 @@
+package com.storage.lesson_2;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your com.storage.lesson_2.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
