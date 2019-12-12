@@ -22,7 +22,7 @@ public class ArrayStorage {
         if (size == MAX_SIZE) {
             System.out.println("The storage is already full. ");
         } else {
-            if (getResume(r.uuid) != null) {
+            if (getIndex(r.uuid) != -1) {
                 System.out.println("ERROR: this resume is already in the storage.");
             } else {
                 storage[size] = r;
@@ -32,40 +32,46 @@ public class ArrayStorage {
     }
 
     void update(String uuid) throws IOException {
-        if (getResume(uuid) == null) {
+        if (getIndex(uuid) == -1) {
             System.out.println("ERROR: there is no such resume in the storage");
         } else {
-            System.out.print("New uuid: ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            getResume(uuid).uuid = reader.readLine();
+            while (true) {
+                System.out.print("New uuid: ");
+                String s = reader.readLine();
+                if (getIndex(s) == -1) {
+                    storage[getIndex(uuid)].uuid = s;
+                    break;
+                } else {
+                    System.out.println("ERROR: there is already resume in the storage with such uuid");
+                }
+            }
         }
     }
 
     Resume get(String uuid) {
-        Resume r = getResume(uuid);
-        if (r == null) {
+        int i = getIndex(uuid);
+        if (i == -1) {
             System.out.println("ERROR: there is no such resume in the storage");
+            return null;
         }
-        return r;
+        return storage[i];
     }
 
-    Resume getResume(String uuid) {
-        int i = 0;
-        while (i < size) {
+    private int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                return storage[i];
-            } else {
-                i++;
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     void delete(String uuid) {
-        if (getResume(uuid) != null) {
+        if (getIndex(uuid) != -1) {
             for (int i = 0; i < size; i++) {
                 if (storage[i].uuid.equals(uuid)) {
-                    System.arraycopy(storage, i +1, storage, i, size - i -1);
+                    System.arraycopy(storage, i + 1, storage, i, size - i - 1);
                     storage[size - 1] = null;
                     size--;
                     break;
