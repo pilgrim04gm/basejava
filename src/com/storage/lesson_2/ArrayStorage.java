@@ -9,7 +9,7 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private int MAX_SIZE = 10000;
+    private static final int MAX_SIZE = 10000;
     private Resume[] storage = new Resume[MAX_SIZE];
     private int size = 0;
 
