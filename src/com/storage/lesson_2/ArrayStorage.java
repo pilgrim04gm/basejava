@@ -9,20 +9,29 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    int MAX_SIZE = 10000;
-    Resume[] storage = new Resume[MAX_SIZE];
-    int size = 0;
+    private int MAX_SIZE = 10000;
+    private Resume[] storage = new Resume[MAX_SIZE];
+    private int size = 0;
 
     void clear() {
-        Arrays.fill(storage, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
+    }
+
+    private int getIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     void save(Resume r) {
         if (size == MAX_SIZE) {
             System.out.println("The storage is already full. ");
         } else {
-            if (getIndex(r.uuid) != -1) {
+            if (getIndex(r.getUuid()) != -1) {
                 System.out.println("ERROR: this resume is already in the storage.");
             } else {
                 storage[size] = r;
@@ -32,7 +41,8 @@ public class ArrayStorage {
     }
 
     void update(String uuid) throws IOException {
-        if (getIndex(uuid) == -1) {
+        int index = getIndex(uuid);
+        if (index == -1) {
             System.out.println("ERROR: there is no such resume in the storage");
         } else {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -40,7 +50,7 @@ public class ArrayStorage {
                 System.out.print("New uuid: ");
                 String s = reader.readLine();
                 if (getIndex(s) == -1) {
-                    storage[getIndex(uuid)].uuid = s;
+                    storage[index].setUuid(s);
                     break;
                 } else {
                     System.out.println("ERROR: there is already resume in the storage with such uuid");
@@ -58,19 +68,10 @@ public class ArrayStorage {
         return storage[i];
     }
 
-    private int getIndex(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].uuid.equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     void delete(String uuid) {
         if (getIndex(uuid) != -1) {
             for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(uuid)) {
+                if (storage[i].getUuid().equals(uuid)) {
                     System.arraycopy(storage, i + 1, storage, i, size - i - 1);
                     storage[size - 1] = null;
                     size--;
@@ -86,7 +87,7 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     int size() {
