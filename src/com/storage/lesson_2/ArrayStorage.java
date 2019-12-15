@@ -8,12 +8,12 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
+public class ArrayStorage implements Storage{
     private static final int MAX_SIZE = 10000;
     private Resume[] storage = new Resume[MAX_SIZE];
     private int size = 0;
 
-    void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
@@ -27,7 +27,7 @@ public class ArrayStorage {
         return -1;
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         if (size == MAX_SIZE) {
             System.out.println("The storage is already full. ");
         } else {
@@ -40,7 +40,7 @@ public class ArrayStorage {
         }
     }
 
-    void update(String uuid) throws IOException {
+    public void update(String uuid) throws IOException {
         int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("ERROR: there is no such resume in the storage");
@@ -59,7 +59,7 @@ public class ArrayStorage {
         }
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         int i = getIndex(uuid);
         if (i == -1) {
             System.out.println("ERROR: there is no such resume in the storage");
@@ -68,7 +68,7 @@ public class ArrayStorage {
         return storage[i];
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         if (getIndex(uuid) != -1) {
             for (int i = 0; i < size; i++) {
                 if (storage[i].getUuid().equals(uuid)) {
@@ -86,11 +86,11 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 }
