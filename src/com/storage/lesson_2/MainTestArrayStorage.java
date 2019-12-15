@@ -1,7 +1,11 @@
 package com.storage.lesson_2;
 
+import com.storage.lesson_2.model.Resume;
+import com.storage.lesson_2.storage.ArrayStorage;
+import com.storage.lesson_2.storage.Storage;
+
 /**
- * Test for your com.storage.lesson_2.ArrayStorage implementation
+ * Test for your com.storage.lesson_2.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
     static final Storage ARRAY_STORAGE = new ArrayStorage();

@@ -1,11 +1,15 @@
 package com.storage.lesson_2;
 
+import com.storage.lesson_2.model.Resume;
+import com.storage.lesson_2.storage.ArrayStorage;
+import com.storage.lesson_2.storage.Storage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for com.storage.lesson_2.ArrayStorage implementation
+ * Interactive test for com.storage.lesson_2.storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {

@@ -1,4 +1,6 @@
-package com.storage.lesson_2;
+package com.storage.lesson_2.storage;
+
+import com.storage.lesson_2.model.Resume;
 
 import java.io.IOException;
 

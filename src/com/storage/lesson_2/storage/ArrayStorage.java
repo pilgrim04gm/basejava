@@ -1,4 +1,7 @@
-package com.storage.lesson_2;
+package com.storage.lesson_2.storage;
+
+import com.storage.lesson_2.model.Resume;
+import com.storage.lesson_2.storage.Storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +11,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage implements Storage{
+public class ArrayStorage implements Storage {
     private static final int MAX_SIZE = 10000;
     private Resume[] storage = new Resume[MAX_SIZE];
     private int size = 0;

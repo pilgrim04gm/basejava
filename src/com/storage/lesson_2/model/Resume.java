@@ -1,4 +1,4 @@
-package com.storage.lesson_2;
+package com.storage.lesson_2.model;
 
 /**
  * Initial resume class
